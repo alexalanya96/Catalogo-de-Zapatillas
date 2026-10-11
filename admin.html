@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Admin | A&A Urban Store</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #f7f7f5;
+        color: #101010;
+        font-family: Inter, Arial, sans-serif;
+      }
+      .site-head {
+        height: 84px;
+        background: #fff;
+        border-bottom: 1px solid #e6e6e4;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 6vw;
+      }
+      .site-head .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: auto;
+        font-weight: 900;
+      }
+      .site-head .brand b {
+        display: block;
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: #e51d2a;
+      }
+      .admin-link {
+        font-weight: 800;
+        font-size: 13px;
+      }
+      .admin-link:hover {
+        color: #e51d2a;
+      }
+      .panel {
+        border-radius: 0;
+        box-shadow: 0 12px 35px #00000008;
+      }
+      .btn {
+        border-radius: 999px;
+      }
+      .btn:hover {
+        background: #e51d2a;
+        color: #fff;
+      }
+      .btn.secondary {
+        background: #eee;
+        color: #111;
+      }
+      .btn.danger {
+        background: #a61b1b;
+        color: white;
+      }
+      .panel h1,
+      .panel h2 {
+        letter-spacing: -1px;
+      }
+      .admin-wrap {
+        max-width: 1050px;
+        margin: 30px auto;
+        padding: 0 18px;
+      }
+      .panel {
+        background: white;
+        border: 1px solid #e5e5e0;
+        border-radius: 16px;
+        padding: 22px;
+        margin-bottom: 18px;
+      }
+      .panel h1,
+      .panel h2 {
+        margin-top: 0;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      label {
+        font-size: 12px;
+        font-weight: 800;
+        display: block;
+        margin: 12px 0 6px;
+      }
+      input,
+      textarea {
+        font: inherit;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 9px;
+        width: 100%;
+      }
+      .wide {
+        grid-column: 1/-1;
+      }
+      .btn {
+        border: 0;
+        border-radius: 9px;
+        padding: 12px 15px;
+        background: #111;
+        color: white;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .btn.secondary {
+        background: #eee;
+        color: #111;
+      }
+      .msg {
+        padding: 12px;
+        border-radius: 9px;
+        background: #eee;
+        white-space: pre-wrap;
+      }
+      .hide {
+        display: none !important;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        text-align: left;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        font-size: 13px;
+      }
+      .table-wrap {
+        overflow: auto;
+      }
+      .actions {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .danger {
+        background: #a61b1b;
+      }
+      .small {
+        font-size: 12px;
+        color: #666;
+      }
+      .photo-preview {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .photo-card {
+        position: relative;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #fafafa;
+        min-width: 0;
+      }
+      .photo-card img {
+        display: block;
+        width: 100%;
+        height: 112px;
+        object-fit: cover;
+      }
+      .photo-card .photo-label {
+        font-size: 11px;
+        padding: 6px 7px;
+        overflow-wrap: anywhere;
+      }
+      .photo-card .photo-remove {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        border: 0;
+        border-radius: 50%;
+        width: 27px;
+        height: 27px;
+        background: #a61b1b;
+        color: #fff;
+        font-weight: 900;
+        cursor: pointer;
+      }
+      .photo-card .main-label {
+        display: inline-block;
+        background: #111;
+        color: #fff;
+        border-radius: 20px;
+        padding: 3px 7px;
+        margin: 4px 7px;
+        font-size: 10px;
+      }
+      .photo-empty {
+        font-size: 12px;
+        color: #777;
+        padding: 12px;
+        border: 1px dashed #ccc;
+        border-radius: 10px;
+      }
+      @media (max-width: 600px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .wide {
+          grid-column: auto;
+        }
+        .panel {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-head">
+      <a class="brand" href="index.html"
+        ><span class="logo">A&A</span
+        ><span>A&A <b>URBAN STORE · ADMIN</b></span></a
+      ><a class="admin-link" href="index.html">Ver tienda ↗</a>
+    </header>
+    <main class="admin-wrap">
+      <section id="login" class="panel">
+        <h1>Panel de administración</h1>
+        <p class="small">Ingresa con una cuenta creada por el propietario.</p>
+        <form id="loginForm">
+          <label>Correo</label
+          ><input
+            id="email"
+            type="email"
+            autocomplete="username"
+            required
+          /><label>Contraseña</label
+          ><input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+          <p><button class="btn">Ingresar</button></p>
+        </form>
+        <div id="loginMsg" class="msg hide"></div>
+        <p class="small">
+          No hay registro público. El propietario crea las cuentas desde
+          Supabase.
+        </p>
+      </section>
+      <section id="dashboard" class="hide">
+        <div class="panel">
+          <h1>Administración</h1>
+          <p id="who" class="small"></p>
+          <button id="logout" class="btn secondary">Cerrar sesión</button>
+          <p id="msg" class="msg hide"></p>
+        </div>
+        <section id="editor" class="panel">
+          <h2 id="formTitle">Agregar producto</h2>
+          <form id="productForm">
+            <input id="id" type="hidden" />
+            <div class="grid">
+              <div>
+                <label>Nombre Zapatilla / Modelo</label
+                ><input id="name" required maxlength="120" />
+              </div>
+              <div>
+                <label>Marca *</label
+                ><input
+                  id="brand"
+                  required
+                  maxlength="60"
+                  placeholder="Puma, Nike, Adidas..."
+                />
+              </div>
+              <div>
+                <label>Categoría *</label
+                ><input
+                  id="category"
+                  required
+                  maxlength="60"
+                  placeholder="Puma, Urbano, Running..."
+                />
+              </div>
+              <div>
+                <label>Precio (S/) *</label
+                ><input id="price" type="number" min="0" step=".01" required />
+              </div>
+              <div>
+                <label>Etiqueta / badge</label
+                ><input
+                  id="badge"
+                  maxlength="30"
+                  placeholder="NUEVO, POPULAR, OFERTA"
+                />
+              </div>
+              <div class="wide">
+                <label for="photoFiles">Fotos de la zapatilla *</label
+                ><input id="photoFiles" type="file" accept="image/*" multiple />
+                <p class="small">
+                  Selecciona una o varias fotos desde tu computadora. La primera
+                  foto será la imagen principal. JPG, PNG, WebP o GIF; máximo 8
+                  MB por imagen.
+                </p>
+                <div
+                  id="photoPreview"
+                  class="photo-preview"
+                  aria-live="polite"
+                ></div>
+                <p id="photoHelp" class="small">
+                  Las fotos nuevas se subirán a Supabase Storage al guardar. En
+                  edición puedes conservar o quitar las fotos actuales.
+                </p>
+              </div>
+              <div>
+                <label>Talla (separadas por coma)</label
+                ><input
+                  id="sizes"
+                  placeholder="23,24,25"
+                  aria-describedby="sizesHelp"
+                />
+                <p id="sizesHelp" class="small">
+                  Se guarda como lista de tallas para el catálogo.
+                </p>
+              </div>
+              <div>
+                <label for="stock">Stock por talla (fácil de ingresar)</label
+                ><input
+                  id="stock"
+                  placeholder="Ejemplo: 23: 2, 24: 5, 25: 3"
+                  aria-describedby="stockHelp"
+                />
+                <p id="stockHelp" class="small">
+                  Escribe talla y cantidad de pares, separadas por comas.
+                  Ejemplo: <strong>23: 2, 24: 5, 25: 3</strong>. El número
+                  después de los dos puntos es la cantidad disponible. Si una
+                  talla no tiene pares, escribe 0.
+                </p>
+              </div>
+              <div class="wide">
+                <label>Descripción</label
+                ><textarea id="description" rows="2"></textarea>
+              </div>
+              <div class="wide">
+                <label
+                  ><input
+                    id="active"
+                    type="checkbox"
+                    checked
+                    style="width: auto"
+                  />
+                  Publicar producto</label
+                >
+              </div>
+            </div>
+            <p class="actions">
+              <button type="submit" class="btn">Guardar producto</button
+              ><button type="button" id="clear" class="btn secondary">
+                Limpiar
+              </button>
+            </p>
+          </form>
+          <p class="small">Permisos de edición verificados por Supabase RLS.</p>
+        </section>
+        <section class="panel">
+          <h2>Productos</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="rows"></tbody>
+            </table>
+          </div>
+        </section>
+        <section id="ownerTools" class="panel hide">
+          <h2>Usuarios y permisos</h2>
+          <p>
+            Solo el propietario crea usuarios y asigna permisos desde Supabase
+            Authentication y la tabla <code>user_profiles</code>. Los
+            administradores no pueden registrar cuentas ni cambiar sus roles.
+          </p>
+          <p class="small">
+            Permisos: products_create, products_update, products_delete,
+            stock_manage. Para administrar pedidos/ventas habrá que añadir el
+            módulo de pedidos.
+          </p>
+          <a
+            class="btn"
+            href="https://supabase.com/dashboard"
+            target="_blank"
+            rel="noopener"
+            >Abrir Supabase ↗</a
+          >
+        </section>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

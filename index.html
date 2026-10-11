@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A&A Urban Store - catálogo de zapatillas y moda urbana."
+    />
+    <title>A&A Urban Store | Catálogo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <!--AÑADIR SUPABASE SDK-->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="A&A Urban Store">
+        <img
+          class="brand-logo"
+          src="img/logo-aa-urban.jpg"
+          alt="A&A Urban Store"/>
+      </a>
+      <nav class="nav">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#como-comprar">Cómo comprar</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button class="cart-btn" id="openCart">
+        Carrito <span id="cartCount">0</span>
+      </button>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A&A URBAN STORE</p>
+          <h1>Tu estilo.<br /><span>Tu actitud.</span></h1>
+          <p class="hero-text">
+            Zapatillas y moda urbana para llevar tu estilo a otro nivel.
+          </p>
+          <a class="primary-btn" href="#catalogo">VER ZAPATILLAS</a>
+        </div>
+
+        <div class="hero-card">
+          <div class="shoe-visual">
+            <img
+              id="heroShoe"
+              src="img/coleccion/"
+              alt="Nueva colección A&A Urban Store"
+            />
+          </div>
+
+          <span>NUEVA COLECCIÓN</span>
+        </div>
+      </section>
+
+      <section class="catalog-section" id="catalogo">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">CATÁLOGO</p>
+            <h2>Encuentra tu próximo par</h2>
+          </div>
+          <div class="controls">
+            <input
+              id="search"
+              type="search"
+              placeholder="Buscar Nike, Dunk, Asics..."
+              aria-label="Buscar productos"
+            />
+            <select id="sort" aria-label="Ordenar productos">
+              <option value="recommended">Recomendados</option>
+              <option value="low">Precio: menor a mayor</option>
+              <option value="high">Precio: mayor a menor</option>
+              <option value="name">Nombre A-Z</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="chips" id="chips">
+          <button class="chip active" data-category="Todos">Todos</button>
+          <button class="chip" data-category="Puma">Puma</button>
+          <button class="chip" data-category="Nike">Nike</button>
+          <button class="chip" data-category="Adidas">Adidas</button>
+          <button class="chip" data-category="Reebok">Reebok</button>
+          <button class="chip" data-category="New Balance">New Balance</button>
+          <button class="chip" data-category="Asics">Asics</button>
+          <button class="chip" data-category="Urban">Urban</button>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+        <p class="empty" id="empty" hidden>
+          No encontramos productos con esa búsqueda.
+        </p>
+      </section>
+
+      <section class="how" id="como-comprar">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">CÓMO COMPRAR</p>
+            <h2>Comprar es sencillo</h2>
+          </div>
+        </div>
+        <div class="steps">
+          <article>
+            <b>01</b>
+            <h3>Elige tu modelo</h3>
+            <p>Revisa el catálogo y selecciona tus zapatillas favoritas.</p>
+          </article>
+          <article>
+            <b>02</b>
+            <h3>Agrega al carrito</h3>
+            <p>Selecciona tu talla y cantidad antes de confirmar.</p>
+          </article>
+          <article>
+            <b>03</b>
+            <h3>Confirma por WhatsApp</h3>
+            <p>Te contactamos para coordinar pago y entrega.</p>
+          </article>
+        </div>
+      </section>
+
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      />
+      <!-- REDES SOCIALES -->
+      <section class="social-section">
+        <div class="social-card">
+          <div class="social-text">
+            <p class="eyebrow">¿Ya sabes qué modelo buscas?</p>
+            <h3>Síguenos en nuestras Redes Sociales</h3>
+            <p>Descubre nuevos modelos, promociones y novedades.</p>
+          </div>
+
+          <div class="social-icons">
+            <a
+              href="https://web.facebook.com/profile.php?id=61593990323428"
+              class="social facebook"
+              aria-label="Facebook"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a
+              href="https://www.instagram.com/aaurbanstore?stkn=MTRhdzNiZG9raHVnZw%3D%3D&utm_source=qr"
+              class="social instagram"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a
+              href="https://www.tiktok.com/@aa.urban.store?_r=1&_t=ZS-9ACzpgsLJGn"
+              class="social tiktok"
+              aria-label="TikTok"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+
+            <a
+              href="https://wa.me/51968233506"
+              class="social whatsapp"
+              aria-label="WhatsApp"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contacto">
+        <div>
+          <p class="eyebrow">A&A URBAN STORE</p>
+          <h2>¿Listo para estrenar?</h2>
+          <p>Escríbenos para consultar modelos, tallas y disponibilidad.</p>
+        </div>
+        <a
+          class="primary-btn"
+          id="contactWhatsApp"
+          target="_blank"
+          rel="noopener"
+          >ESCRÍBENOS POR WHATSAPP</a
+        >
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year"></span> A&A Urban Store</span>
+      <span
+        >Estilo urbano. Tu mejor versión. ·
+        <a href="admin.html" aria-label="Administración"
+          >Administración</a
+        ></span
+      >
+    </footer>
+
+    <aside class="drawer" id="drawer" aria-hidden="true">
+      <div class="drawer-head">
+        <h2>Tu carrito</h2>
+        <button id="closeCart" aria-label="Cerrar">×</button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-footer">
+        <div class="total">
+          <span>Total</span><strong id="cartTotal">S/ 0.00</strong>
+        </div>
+        <button class="primary-btn full" id="checkout">
+          PEDIR POR WHATSAPP
+        </button>
+        <button class="text-btn" id="clearCart">Vaciar carrito</button>
+      </div>
+    </aside>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Modal profesional de galería de producto -->
+    <section
+      class="product-modal"
+      id="productModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
+      <button
+        class="modal-backdrop"
+        data-modal-close
+        aria-label="Cerrar ventana"
+      ></button>
+      <div class="modal-panel">
+        <button class="modal-close" data-modal-close aria-label="Cerrar">
+          ×
+        </button>
+        <div class="modal-gallery">
+          <div class="modal-main-image">
+            <button
+              class="gallery-arrow prev"
+              id="galleryPrev"
+              aria-label="Foto anterior"
+            >
+              ‹</button
+            ><img id="modalMainImage" src="" alt="" /><button
+              class="gallery-arrow next"
+              id="galleryNext"
+              aria-label="Foto siguiente"
+            >
+              ›</button
+            ><span class="gallery-counter" id="galleryCounter">1 / 1</span>
+          </div>
+          <div class="modal-thumbnails" id="modalThumbnails"></div>
+        </div>
+        <div class="modal-details">
+          <p class="eyebrow">A&A URBAN STORE · DETALLE DEL PRODUCTO</p>
+          <p class="modal-brand" id="modalBrand"></p>
+          <h2 id="modalTitle"></h2>
+          <div class="modal-price" id="modalPrice"></div>
+          <p class="modal-description">
+            Diseño urbano, comodidad y estilo para todos los días. Consulta la
+            disponibilidad de tu talla antes de confirmar el pedido.
+          </p>
+          <div class="modal-label">ELIGE TU TALLA</div>
+          <div class="modal-sizes" id="modalSizes"></div>
+          <button class="primary-btn modal-add" id="modalAdd">
+            AGREGAR AL CARRITO</button
+          ><a
+            class="modal-whatsapp"
+            id="modalWhatsApp"
+            target="_blank"
+            rel="noopener"
+            >Consultar por WhatsApp ↗</a
+          >
+          <p class="modal-note" id="modalNote">
+            Las tallas agotadas aparecen bloqueadas.
+          </p>
+        </div>
+      </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

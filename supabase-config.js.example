@@ -1,0 +1,4 @@
+// Renombra este archivo a supabase-config.js y completa los valores de tu proyecto.
+// Usa la Project URL y la publishable/anon key. JAMÁS pongas service_role en el navegador.
+window.SUPABASE_URL = "https://TU-PROYECTO.supabase.co";
+window.SUPABASE_ANON_KEY = "TU_CLAVE_PUBLICABLE";
