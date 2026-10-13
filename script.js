@@ -1,15 +1,6 @@
-//const products = [
- // {id:1, brand:"Puma", name:"Puma Estrellita", price:120, category:"Puma", sizes:["23","24","25"],stock:{"23":0,"24":1,"25":1}, badge:"NUEVO",image:"img/1.jpg", gallery:["img/1.jpg","img/2.jpg","img/3.jpg"]},
- //{id:2, brand:"Puma", name:"Street Runner", price:139, category:"Puma", sizes:["39","40","41","42","43"],stock:{"39":1,"40":1,"41":1,"42":1,"43":1}, badge:"POPULAR",image:"img/2.jpg", gallery:["img/2.jpg"]},
- // {id:3, brand:"Puma", name:"Gel Street", price:169, category:"Puma", sizes:["38","39","40","41","42"],stock:{"38":1,"39":1,"40":1,"41":1,"42":1}, badge:"NUEVO",image:"img/3.jpg", gallery:["img/3.jpg"]},
- // {id:4, brand:"Urban", name:"Urban Classic", price:119, category:"Urban", sizes:["38","39","40","41","42","43"],stock:{"38":1,"39":1,"40":1,"41":1,"42":1,"43":1}, badge:"OFERTA",image:"img/4.jpeg", gallery:["img/4.jpeg"]},
- // {id:5, brand:"Nike", name:"Air Urban", price:179, category:"Nike", sizes:["39","40","41","42","43"],stock:{"39":1,"40":1,"41":1,"42":1,"43":1}, badge:"NUEVO",image:"img/5.jpeg", gallery:["img/5.jpeg"]},
- // {id:6, brand:"Puma", name:"Campus Street", price:159, category:"Puma", sizes:["38","39","40","41","42"],stock:{"38":1,"39":1,"40":1,"41":1,"42":1}, badge:"NUEVO", image:"img/6.jpeg", gallery:["img/6.jpeg"]},
-//  {id:7, brand:"Adidas", name:"Gel Motion", price:189, category:"Adidas", sizes:["39","40","41","42","43"],stock:{"39":1,"40":1,"41":1,"42":1,"43":1}, badge:"TOP", image:"img/7.jpeg", gallery:["img/7.jpeg"]},
-//  {id:8, brand:"Reebok", name:"Black Essential", price:109, category:"Reebok", sizes:["38","39","40","41","42","43"],stock:{"38":1,"39":1,"40":1,"41":1,"42":1,"43":1}, badge:"OFERTA", image:"img/8.jpeg", gallery:["img/8.jpeg"]},
-//  {id:9, brand:"Puma", name:"Alex", price:109, category:"Urban", sizes:["38","39","40","41","42","43"],stock:{"38":1,"39":1,"40":1,"41":1,"42":1,"43":1}, badge:"OFERTA", image:"img/9.jpg", gallery:["img/9.jpg"]},
-//  {id:10, brand:"New Balanz", name:"Urban", price:109, category:"Urban", sizes:["38","39","40","41","42","43"],stock:{"38":1,"39":1,"40":1,"41":1,"42":1,"43":1}, badge:"OFERTA", image:"img/10.jpg", gallery:["img/10.jpg"]}
-//];
+const products = [
+  {id:1, brand:"Puma", name:"Puma Estrellita", price:120, category:"Puma", sizes:["23","24","25"],stock:{"23":0,"24":1,"25":1}, badge:"NUEVO",image:"img/1.jpg", gallery:["img/1.jpg","img/2.jpg","img/3.jpg"]},
+ ];
 
 const state = {category:"Todos", search:"", sort:"recommended", cart:[]};
 const grid = document.getElementById("productGrid");
