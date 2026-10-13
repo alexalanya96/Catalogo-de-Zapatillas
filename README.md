@@ -54,3 +54,13 @@ values('123e4567-e89b-12d3-a456-426614174000','Encargado de inventario','invento
 - `image_url` (equivalente a `image`) y `gallery`: URLs públicas de fotos alojadas en Supabase Storage.
 
 Si ya ejecutaste el SQL anterior, vuelve a ejecutar el archivo actualizado: añade las columnas `category` y `badge` sin borrar los productos existentes.
+
+## Actualización responsive y formulario de pedidos
+
+- Se conservaron las carpetas, imágenes y archivos originales del catálogo y del panel de administración.
+- La sección **Nueva colección** ahora se muestra en pantallas móviles y adapta la imagen al ancho disponible.
+- El botón de confirmar pedido abre un formulario con nombre, teléfono, entrega, distrito/ciudad, dirección opcional, método de pago e indicaciones.
+- Al enviar, se prepara un mensaje con los productos, tallas, cantidades, total y datos del cliente para enviarlo al WhatsApp de ventas configurado en `script.js`.
+- Para mostrar el QR real de Yape, guarda la imagen QR completa y escaneable como `img/yape-qr.png`.
+- En `script.js`, revisa `WHATSAPP_SALES_NUMBER`, `YAPE_OWNER` y `YAPE_NUMBER` antes de publicar. Los datos del ejemplo de pago deben confirmarse con el titular de la cuenta.
+- El enlace de WhatsApp no valida pagos ni descuenta inventario automáticamente; la tienda debe confirmar el pago y el stock manualmente.

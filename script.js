@@ -171,13 +171,49 @@ document.getElementById("openCart").onclick=openCart;
 document.getElementById("closeCart").onclick=closeCart;
 document.getElementById("overlay").onclick=closeCart;
 document.getElementById("clearCart").onclick=()=>{state.cart=[];renderCart()};
-document.getElementById("checkout").onclick=()=>{
-  if(!state.cart.length){alert("Agrega al menos un producto.");return}
-  const lines=state.cart.map(x=>`• ${x.name} | Talla ${x.size} | Cant. ${x.qty} | ${money(x.price*x.qty)}`).join("\n");
-  const total=state.cart.reduce((a,x)=>a+x.price*x.qty,0);
-  const msg=`Hola A&A Urban Store 👋%0AQuiero realizar este pedido:%0A${encodeURIComponent(lines)}%0A%0ATotal: ${encodeURIComponent(money(total))}%0A%0A¿Me confirman disponibilidad y forma de entrega?`;
-  window.open(`https://wa.me/51968233506?text=${msg}`,"_blank");
-};
+const checkoutModal = document.getElementById("checkoutModal");
+const checkoutForm = document.getElementById("checkoutForm");
+const WHATSAPP_SALES_NUMBER = "51968233506"; // Cambiar si el número de ventas es otro
+const YAPE_OWNER = "Alex Alanya"; // Verificar antes de publicar
+const YAPE_NUMBER = "968233506"; // Verificar antes de publicar
+
+document.getElementById("yapeOwner").textContent = YAPE_OWNER;
+document.getElementById("yapeNumber").textContent = YAPE_NUMBER;
+document.getElementById("yapeQr").addEventListener("error", function(){ this.style.display="none"; });
+function openCheckout(){
+  if(!state.cart.length){alert("Agrega al menos un producto antes de confirmar el pedido.");return;}
+  document.getElementById("checkoutTotal").textContent = money(state.cart.reduce((a,x)=>a+x.price*x.qty,0));
+  checkoutModal.classList.add("open"); checkoutModal.setAttribute("aria-hidden","false"); document.body.style.overflow="hidden";
+  document.getElementById("yapeBox").hidden = document.querySelector('input[name="paymentMethod"]:checked').value !== "Yape";
+}
+function closeCheckout(){checkoutModal.classList.remove("open");checkoutModal.setAttribute("aria-hidden","true");document.body.style.overflow="";}
+document.getElementById("checkout").onclick=()=>{closeCart();openCheckout();};
+document.getElementById("closeCheckout").onclick=closeCheckout;
+document.getElementById("backToCart").addEventListener("click",e=>{e.preventDefault();closeCheckout();openCart();});
+document.querySelectorAll('input[name="paymentMethod"]').forEach(r=>r.addEventListener("change",()=>{document.getElementById("yapeBox").hidden=r.value!=="Yape" || !r.checked;}));
+document.getElementById("copyYape").addEventListener("click",async()=>{
+  try { await navigator.clipboard.writeText(YAPE_NUMBER); alert("Número de Yape copiado."); }
+  catch { window.prompt("Copia el número de Yape:",YAPE_NUMBER); }
+});
+checkoutForm.addEventListener("submit",e=>{
+  e.preventDefault();
+  if(!state.cart.length){alert("Tu carrito está vacío.");closeCheckout();return;}
+  const form = new FormData(checkoutForm);
+  const lines = state.cart.map(x=>`• ${x.brand} ${x.name} | Talla ${x.size} | Cantidad ${x.qty} | ${money(x.price*x.qty)}`).join("\n");
+  const total = state.cart.reduce((a,x)=>a+x.price*x.qty,0);
+  const message = [
+    "Hola A&A Urban Store 👋, quiero confirmar este pedido:", "", lines, "",
+    `Total a pagar: ${money(total)}`, "", "DATOS DE ENTREGA",
+    `Nombre: ${form.get("customerName")}`, `Teléfono: ${form.get("customerPhone")}`,
+    `Forma de entrega: ${form.get("deliveryMethod")}`, `Distrito/ciudad: ${form.get("customerDistrict")}`,
+    `Dirección/referencia: ${form.get("customerAddress") || "No indicada"}`,
+    `Método de pago: ${form.get("paymentMethod")}`,
+    form.get("paymentMethod") === "Yape" ? `Yape a nombre de ${YAPE_OWNER}, número ${YAPE_NUMBER}. Enviaré el comprobante por este chat.` : "Pago en efectivo, por coordinar.",
+    `Indicaciones: ${form.get("orderNotes") || "Ninguna"}`,
+    "", "Por favor, confirmar disponibilidad, costo de envío y pedido."
+  ].join("\n");
+  window.open(`https://wa.me/${WHATSAPP_SALES_NUMBER}?text=${encodeURIComponent(message)}`,"_blank","noopener");
+});
 document.getElementById("contactWhatsApp").href="https://wa.me/51968233506?text=Hola%20A%26A%20Urban%20Store%2C%20quiero%20consultar%20por%20zapatillas.";
 document.getElementById("modalWhatsApp").addEventListener("click",()=>{});
 function updateModalWhatsApp(){if(!modalProduct)return;document.getElementById("modalWhatsApp").href=`https://wa.me/51968233506?text=${encodeURIComponent(`Hola A&A Urban Store, consulto por ${modalProduct.name}${modalSize?` talla ${modalSize}`:""}. ¿Hay disponibilidad?`)}`;}
